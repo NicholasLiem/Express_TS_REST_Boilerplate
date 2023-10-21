@@ -1,19 +1,22 @@
-import {UserService} from "../application/services/user.service";
-import {RepositoryContainer} from "./repository.container";
+import {UserService} from '../application/services/user.service';
+import {RepositoryContainer} from './repository.container';
 
 export class ServiceContainer {
-    private _userService : UserService;
-    constructor(
-        repositoryContainer: RepositoryContainer
-    ) {
-        this._userService = new UserService(repositoryContainer.userRepository);
+    private static instance: ServiceContainer;
+    private userService: UserService;
+
+    private constructor(repositoryContainer: RepositoryContainer) {
+        this.userService = new UserService(repositoryContainer.getUserRepository());
     }
 
-    get userService(): UserService {
-        return this._userService;
+    public static getInstance(repositoryContainer: RepositoryContainer): ServiceContainer {
+        if (!ServiceContainer.instance) {
+            ServiceContainer.instance = new ServiceContainer(repositoryContainer);
+        }
+        return ServiceContainer.instance;
     }
 
-    set userService(value: UserService) {
-        this._userService = value;
+    public getUserService(): UserService {
+        return this.userService;
     }
 }

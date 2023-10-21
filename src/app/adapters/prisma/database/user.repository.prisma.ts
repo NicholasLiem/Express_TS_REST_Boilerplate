@@ -1,5 +1,6 @@
 import {PrismaClient, User} from '@prisma/client';
-import { UserRepository } from '../../../interfaces/repositories/user.repository';
+import {UserRepository} from '../../../interfaces/repositories/user.repository';
+
 const prisma = new PrismaClient();
 export class UserRepositoryPrisma implements UserRepository {
     async create(user: User) {
@@ -26,6 +27,17 @@ export class UserRepositoryPrisma implements UserRepository {
         await prisma.user.update({
             where: { id: user.id },
             data: user,
+        });
+    }
+
+    async findUserByIdentifier(identifier: string) {
+        return prisma.user.findFirst({
+            where: {
+                OR: [
+                    { username: identifier },
+                    { email: identifier },
+                ],
+            },
         });
     }
 }

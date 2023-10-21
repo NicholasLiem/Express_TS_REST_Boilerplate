@@ -1,8 +1,11 @@
-import express from 'express';
+import {Request, Response, Router} from 'express';
+import {UserController} from "../../../application/controllers/user.controller";
+import {jwt_middleware} from "../middlewares/jwt_auth.middleware";
 
-const userRoutes = express.Router();
-import { controllerContainer } from '../../../bootstrap';
-
-userRoutes.get('/', controllerContainer.userController.getUser);
-
-export default userRoutes;
+export function userRoutes(controller: UserController): Router {
+    const router = Router();
+    router.get('/', jwt_middleware, (req: Request, res: Response) => {
+        controller.getUser(req, res).then(r => {});
+    })
+    return router;
+}
