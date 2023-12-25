@@ -38,11 +38,11 @@ jobs:
       working-directory: ./src
     
     - name: Set up public key file
-      run: cp .public.key.example public.key
+      run: cp public.key.example public.key
       working-directory: ./src
     
     - name: Set up private key file
-      run: cp .private.key.example private.key
+      run: cp private.key.example private.key
       working-directory: ./src
       
     - name: Install dependencies
