@@ -5,9 +5,8 @@ import cookieParser from 'cookie-parser'
 import { routes } from './routes'
 import { initContainer } from './bootstrap'
 
-const app = express()
-const port = process.env.PORT || 3000
 dotEnv.config()
+const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
@@ -17,17 +16,16 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
-const serviceContainer = initContainer()
-routes(app, serviceContainer)
-const startServer = async () => {
+async function main () {
     try {
-        app.listen(port, () => {
-            console.log(`Server is running on port ${port}`)
-        })
+        const serviceContainer = await initContainer()
+        routes(app, serviceContainer)
     } catch (error) {
-        console.log('Fail to initialize server: ', error)
+        console.error('Error during initialization:', error)
         process.exit(1)
     }
 }
 
-startServer().then(() => {})
+main()
+
+export default app

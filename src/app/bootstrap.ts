@@ -4,7 +4,7 @@ import { ServiceContainer } from './containers/service.container'
 import { UserRepositoryPrisma } from './adapters/prisma/database/user.repository.prisma'
 import { RedisClient } from './adapters/redis/redis.client'
 
-export function initContainer (): ServiceContainer {
+export async function initContainer (): Promise<ServiceContainer> {
     /**
      * Initialize Prisma Client
      */
@@ -14,7 +14,8 @@ export function initContainer (): ServiceContainer {
     /**
      * Initialize Redis Client
      */
-    RedisClient.getInstance()
+    const redisClient = RedisClient.getInstance()
+    await redisClient.connect()
 
     /**
      * Initialize SOAP Client

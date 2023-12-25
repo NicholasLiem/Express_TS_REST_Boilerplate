@@ -2,16 +2,9 @@ import { createClient, type RedisClientType } from 'redis'
 
 export class RedisClient {
     private static instance: RedisClient
-    private readonly client: RedisClientType
+    private client: RedisClientType | null = null
 
     private constructor () {
-        this.client = createClient({
-            url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
-            password: process.env.REDIS_PASSWORD
-        })
-
-        this.client.on('error', (err) => { console.log('Redis Client Error', err) })
-        this.client.connect().then(() => { console.log('Redis connected') })
     }
 
     public static getInstance (): RedisClient {
@@ -21,22 +14,49 @@ export class RedisClient {
         return RedisClient.instance
     }
 
-    public async set (key: string, value: string, expireInSeconds?: number): Promise<void> {
-        if (expireInSeconds) {
-            await this.client.set(key, value, {
-                EX: expireInSeconds,
-                NX: true
+    public async connect (): Promise<void> {
+        if (!this.client) {
+            this.client = createClient({
+                url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+                password: process.env.REDIS_PASSWORD
             })
-        } else {
-            await this.client.set(key, value)
+
+            this.client.on('error', (err) => {
+                console.log('Redis Client Error', err)
+            })
+
+            await this.client.connect()
+            console.log('Redis connected')
+        }
+    }
+
+    public disconnect (): void {
+        if (this.client) {
+            this.client.disconnect()
+            this.client = null
+        }
+    }
+
+    public async set (key: string, value: string, expireInSeconds?: number): Promise<void> {
+        if (this.client) {
+            if (expireInSeconds) {
+                await this.client.set(key, value, {
+                    EX: expireInSeconds,
+                    NX: true
+                })
+            } else {
+                await this.client.set(key, value)
+            }
         }
     }
 
     public async get (key: string): Promise<string | null> {
-        return await this.client.get(key)
+        return this.client ? await this.client.get(key) : null
     }
 
     public async del (key: string): Promise<void> {
-        await this.client.del(key)
+        if (this.client) {
+            await this.client.del(key)
+        }
     }
 }

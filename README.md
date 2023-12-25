@@ -33,6 +33,6 @@ docker-compose up -d --build
 ```
 
 ## Checklist to be Added
-1. Unit testing w/ Jest and Supertest
-2. GitHub workflow for unit test
-3. Use generics on Req for JWT claims
+1. GitHub workflow for unit test
+2. Use generics on Req for JWT claims
+3. Error handling using function handleError(res, error) + error types
