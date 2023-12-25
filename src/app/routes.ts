@@ -6,8 +6,8 @@ import { UserController } from './application/controllers/user.controller'
 import { type ServiceContainer } from './containers/service.container'
 
 export function routes (app: Express, container: ServiceContainer) {
-  const userController = new UserController(container.getUserService())
-  app.use('/api/v1/health', healthRoutes)
-  app.use('/api/v1/users', userRoutes(userController))
-  app.use('/api/v1/auth', authRoutes(userController))
+    const userController = new UserController(container.getUserService())
+    app.use('/api/v1/health', healthRoutes)
+    app.use('/api/v1/users', userRoutes(userController))
+    app.use('/api/v1/auth', authRoutes(userController))
 }

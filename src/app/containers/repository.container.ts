@@ -1,21 +1,21 @@
 import { type UserRepository } from '../interfaces/repositories/user.repository'
 
 export class RepositoryContainer {
-  private static instance: RepositoryContainer
-  private readonly userRepository: UserRepository
+    private static instance: RepositoryContainer
+    private readonly userRepository: UserRepository
 
-  private constructor (userRepository: UserRepository) {
-    this.userRepository = userRepository
-  }
-
-  public static getInstance (userRepository: UserRepository): RepositoryContainer {
-    if (!RepositoryContainer.instance) {
-      RepositoryContainer.instance = new RepositoryContainer(userRepository)
+    private constructor (userRepository: UserRepository) {
+        this.userRepository = userRepository
     }
-    return RepositoryContainer.instance
-  }
 
-  public getUserRepository (): UserRepository {
-    return this.userRepository
-  }
+    public static getInstance (userRepository: UserRepository): RepositoryContainer {
+        if (!RepositoryContainer.instance) {
+            RepositoryContainer.instance = new RepositoryContainer(userRepository)
+        }
+        return RepositoryContainer.instance
+    }
+
+    public getUserRepository (): UserRepository {
+        return this.userRepository
+    }
 }
