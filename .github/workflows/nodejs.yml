@@ -31,19 +31,24 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: '14'
+        node-version: '20'
     
     - name: Set up .env file
       run: cp ./src/.env.example .env
+      working-directory: ./src
     
     - name: Set up public key file
       run: cp ./src/public.key.example public.key
+      working-directory: ./src
     
     - name: Set up private key file
       run: cp ./src/private.key.example private.key
+      working-directory: ./src
       
     - name: Install dependencies
       run: yarn install
+      working-directory: ./src
     
     - name: Run tests
       run: yarn test
+      working-directory: ./src
