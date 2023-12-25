@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 export async function hashString (str: string) {
   const SALT_ROUNDS = process.env.SALT_ROUNDS
   if (SALT_ROUNDS !== null && SALT_ROUNDS !== undefined) {
-    // @ts-expect-error
+    // @ts-ignore
     const saltRounds = parseInt(process.env.SALT_ROUNDS, 10)
     return await bcrypt.hash(str, saltRounds)
   }
