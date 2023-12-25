@@ -34,8 +34,14 @@ jobs:
         node-version: '14'
     
     - name: Set up .env file
-      run: cp .env.example .env
+      run: cp ./src/.env.example .env
     
+    - name: Set up public key file
+      run: cp ./src/public.key.example public.key
+    
+    - name: Set up private key file
+      run: cp ./src/private.key.example private.key
+      
     - name: Install dependencies
       run: yarn install
     
