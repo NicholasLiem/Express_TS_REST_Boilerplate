@@ -1,8 +1,8 @@
-import express from 'express';
+import express from 'express'
 
-const healthRoutes = express.Router();
+const healthRoutes = express.Router()
 
 healthRoutes.get('/', (req, res) => {
-    res.json({ message: 'This is a simple GET request handler' });
-});
-export default healthRoutes;
+  res.json({ message: 'This is a simple GET request handler' })
+})
+export default healthRoutes
