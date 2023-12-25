@@ -8,7 +8,7 @@ services:
         context: .
         dockerfile: dockerfile/Dockerfile.postgres
       ports:
-        - "5433:5432"
+        - "5432:5432"
       env_file:
         - docker.env
       volumes:

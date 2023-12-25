@@ -1,6 +1,13 @@
 FROM node:20-alpine
 WORKDIR /app
 
+# Copy your application source and the startup script
+COPY . .
+
+# Give execute permission to the startup script
+RUN chmod +x ./scripts/start.sh
+
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+# Run the startup script
+CMD ["./start.sh"]
