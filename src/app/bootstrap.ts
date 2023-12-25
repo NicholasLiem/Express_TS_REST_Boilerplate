@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { RepositoryContainer } from './containers/repository.container'
 import { ServiceContainer } from './containers/service.container'
 import { UserRepositoryPrisma } from './adapters/prisma/database/user.repository.prisma'
+import { RedisClient } from './adapters/redis/redis.client'
 
 export function initContainer (): ServiceContainer {
     /**
@@ -13,6 +14,7 @@ export function initContainer (): ServiceContainer {
     /**
      * Initialize Redis Client
      */
+    RedisClient.getInstance()
 
     /**
      * Initialize SOAP Client

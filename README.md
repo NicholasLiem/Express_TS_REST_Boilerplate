@@ -25,9 +25,5 @@ docker-compose up -d --build
 ## Checklist to be Added
 
 1. Unit testing w/ Jest and Supertest
-2. Lint
-3. Rate Limitter
-4. Scripts to build docker image
-5. GitHub workflow for unit test
-6. Use generics on Req for JWT claims
-7. Implement Redis client
+2. GitHub workflow for unit test
+3. Use generics on Req for JWT claims
