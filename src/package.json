@@ -6,22 +6,32 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon -L",
-    "migrate": "npx prisma migrate dev"
+    "migrate": "npx prisma migrate dev",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/bcrypt": "^5.0.1",
-    "@types/redis": "^4.0.11",
     "@types/cookie-parser": "^1.4.4",
     "@types/cors": "^2.8.14",
     "@types/express": "^4.17.19",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.8.6",
+    "@types/redis": "^4.0.11",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^43.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
     "nodemon": "^3.0.1",
     "prisma": "^5.4.2",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "*"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2",
@@ -30,6 +40,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "redis": "^4.6.10",
     "zod": "^3.22.4"
   }
