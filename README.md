@@ -30,3 +30,4 @@ docker-compose up -d --build
 4. Scripts to build docker image
 5. GitHub workflow for unit test
 6. Use generics on Req for JWT claims
+7. Implement Redis client
