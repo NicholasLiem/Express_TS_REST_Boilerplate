@@ -44,7 +44,7 @@ export class UserService implements UserService {
         const hashedPassword = await hashString(password)
 
         if (hashedPassword) {
-            // @ts-expect-error
+            // @ts-ignore
             const newUser: User = {
                 username,
                 name,
@@ -53,7 +53,7 @@ export class UserService implements UserService {
                 hashedPassword
             }
 
-            // @ts-expect-error
+            // @ts-ignore
             await this.userRepository.create(newUser)
             return true
         } else {

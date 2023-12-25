@@ -14,15 +14,15 @@ export function jwt_middleware (req: Request, res: Response, next: NextFunction)
     try {
         const decoded = verifyJWT(tokenWithoutBearer)
         if (decoded.payload) {
-            // @ts-expect-error
+            // @ts-ignore
             const { username, name, expiresIn, issuedAt } = decoded.payload
-            // @ts-expect-error
+            // @ts-ignore
             req.username = username
-            // @ts-expect-error
+            // @ts-ignore
             req.name = name
-            // @ts-expect-error
+            // @ts-ignore
             req.expiresIn = expiresIn
-            // @ts-expect-error
+            // @ts-ignore
             req.issuedAt = issuedAt
             console.log(decoded.payload)
             next()
