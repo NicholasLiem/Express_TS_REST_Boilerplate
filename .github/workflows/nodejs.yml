@@ -34,7 +34,7 @@ jobs:
         node-version: '14'
     
     - name: Set up .env file
-      run: cp .env.test .env
+      run: cp .env.example .env
     
     - name: Install dependencies
       run: yarn install
