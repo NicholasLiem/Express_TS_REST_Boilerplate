@@ -1,10 +1,16 @@
 FROM node:20-alpine
 WORKDIR /app
 
+COPY ./src/package.json ./src/yarn.lock ./
+
+# Installing modules
+RUN yarn install
+
+# Copy the rest of your application's code
 COPY . .
 
+# Set permissions for start script
 COPY ./scripts /scripts
-
 RUN chmod +x /scripts/start.sh
 
 EXPOSE 3000
