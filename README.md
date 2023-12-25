@@ -1,29 +1,38 @@
-# Bondflix REST Service
+# Express TS REST Boilerplate
 
-## Cara Menginstall dan Menjalankan Program - How to Install and Run The Program
+## How to Install and Run The Program
 
 1. Clone this repository
 ```sh
-https://gitlab.informatika.org/if3110-2023-k01-01-24/bondflix-rest-service.git
+https://github.com/NicholasLiem/Express_TS_REST_Boilerplate
 ```
 
-2. Change the current directory to 'bondflix-rest-service' folder
+2. Change the current directory to 'Express_TS_REST_Boilerplate' folder
 ```sh
-cd bondflix-rest-service
+cd Express_TS_REST_Boilerplate
 ```
 
-3. Make a new .env file based on .env.example both for the docker and inside 'src folder'
+3. Make a new env file for docker
 ```sh
-mv .env.example .env && mv docker.env.example docker.env
+mv docker.env.example docker.env
 ```
 
-4. Build and run your docker containers
+4. Move to 'src' folder
+```sh
+cd src
+```
+
+5. Make a new env file for .env, and the keys
+```sh
+mv .env.example .env && mv public.key.example public.key && mv private.key.example private.key 
+```
+
+6. Build and run your docker containers
 ```sh
 docker-compose up -d --build
 ```
 
 ## Checklist to be Added
-
 1. Unit testing w/ Jest and Supertest
 2. GitHub workflow for unit test
 3. Use generics on Req for JWT claims
