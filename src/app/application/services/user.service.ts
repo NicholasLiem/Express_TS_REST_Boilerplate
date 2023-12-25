@@ -42,7 +42,6 @@ export class UserService implements UserService {
 
     async register (username: string, name: string, email: string, password: string): Promise<boolean | null> {
         const hashedPassword = await hashString(password)
-
         if (hashedPassword) {
             // @ts-ignore
             const newUser: User = {
@@ -52,7 +51,6 @@ export class UserService implements UserService {
                 isAdmin: false,
                 hashedPassword
             }
-
             // @ts-ignore
             await this.userRepository.create(newUser)
             return true
