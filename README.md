@@ -35,3 +35,4 @@ docker-compose up -d --build
 ## Checklist to be Added
 1. Use generics on Req for JWT claims
 2. Segregating api tests with unit tests
+3. Error between GitHub Workflow and Prisma and Connection to DB
