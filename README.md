@@ -24,7 +24,7 @@ cd src
 
 5. Make a new env file for .env, and the keys
 ```sh
-mv .env.example .env && mv public.key.example public.key && mv private.key.example private.key 
+cp .env.example .env && cp public.key.example public.key && cp private.key.example private.key 
 ```
 
 6. Build and run your docker containers
