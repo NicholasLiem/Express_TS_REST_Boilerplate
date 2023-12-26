@@ -1,5 +1,5 @@
 # Express TS REST Boilerplate
-
+[![Node.js CI](https://github.com/NicholasLiem/Express_TS_REST_Boilerplate/actions/workflows/nodejs.yml/badge.svg?branch=main)](https://github.com/NicholasLiem/Express_TS_REST_Boilerplate/actions/workflows/nodejs.yml)
 ## How to Install and Run The Program
 
 1. Clone this repository
