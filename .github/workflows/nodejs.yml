@@ -34,7 +34,9 @@ jobs:
         node-version: '20'
     
     - name: Set up .env file
-      run: cp .env.example .env
+      run: |
+        cp .env.example .env
+        echo "DATABASE_URL=postgresql://dev_user:dev_password@rest_db:5432/dev_database?schema=public" >> .env
       working-directory: ./src
     
     - name: Set up public key file
@@ -47,6 +49,14 @@ jobs:
       
     - name: Install dependencies
       run: yarn install
+      working-directory: ./src
+
+    - name: Wait for DB
+      run: |
+        until pg_isready -h rest_db -p 5432; do
+          echo "Waiting for DB to be ready..."
+          sleep 2
+        done
       working-directory: ./src
 
     - name: Run Prisma Migrations
