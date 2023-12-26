@@ -49,7 +49,11 @@ jobs:
     - name: Set up private key file
       run: cp private.key.example private.key
       working-directory: ./src
-
+      
+    - name: Install dependencies
+      run: yarn install
+      working-directory: ./src
+    
     - name: Generate prisma file
       run: npx prisma generate
       working-directory: ./src
@@ -59,13 +63,9 @@ jobs:
       working-directory: ./src
 
     - name: Push db
-      run: npx prisma db push --preview-feature
+      run: npx prisma db push
       working-directory: ./src
-      
-    - name: Install dependencies
-      run: yarn install
-      working-directory: ./src
-    
+
     - name: Run tests
       run: yarn test
       working-directory: ./src
