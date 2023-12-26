@@ -48,6 +48,10 @@ jobs:
     - name: Install dependencies
       run: yarn install
       working-directory: ./src
+
+    - name: Run Prisma Migrations
+      run: npx prisma migrate deploy
+      working-directory: ./src
     
     - name: Run tests
       run: yarn test
