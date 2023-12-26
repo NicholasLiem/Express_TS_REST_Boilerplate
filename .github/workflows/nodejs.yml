@@ -51,6 +51,10 @@ jobs:
       run: yarn install
       working-directory: ./src
 
+    - name: Get rest_db logs
+      if: failure()
+      run: docker logs rest_db
+
     - name: Wait for DB
       run: |
         until pg_isready -h rest_db -p 5432; do
