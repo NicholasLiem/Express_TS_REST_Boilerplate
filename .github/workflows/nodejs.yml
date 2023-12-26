@@ -8,22 +8,27 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     services:
       rest_redis:
-        image: redis
+        image: redis:7.2.1
         ports:
           - 6379:6379
       rest_db:
-        image: postgres
+        image: postgres:16-alpine
         env:
           POSTGRES_USER: dev_user
           POSTGRES_PASSWORD: dev_password
           POSTGRES_DB: dev_database
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
           - 5432:5432
+    env:
+      DATABASE_URL: postgresql://dev_user:dev_password@localhost:5432/dev_database
 
     steps:
     - uses: actions/checkout@v2
@@ -35,8 +40,6 @@ jobs:
     
     - name: Set up .env file
       run: cp .env.example .env
-      env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       working-directory: ./src
     
     - name: Set up public key file
@@ -45,6 +48,18 @@ jobs:
     
     - name: Set up private key file
       run: cp private.key.example private.key
+      working-directory: ./src
+
+    - name: Generate prisma file
+      run: npx prisma generate
+      working-directory: ./src
+    
+    - name: Migrate prisma file
+      run: npx prisma migrate deploy
+      working-directory: ./src
+
+    - name: Push db
+      run: npx prisma db push --preview-feature
       working-directory: ./src
       
     - name: Install dependencies
