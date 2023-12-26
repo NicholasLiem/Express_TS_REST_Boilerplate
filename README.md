@@ -14,7 +14,7 @@ cd Express_TS_REST_Boilerplate
 
 3. Make a new env file for docker
 ```sh
-mv docker.env.example docker.env
+cp docker.env.example docker.env
 ```
 
 4. Move to 'src' folder
