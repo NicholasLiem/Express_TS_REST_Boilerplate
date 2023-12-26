@@ -35,6 +35,8 @@ jobs:
     
     - name: Set up .env file
       run: cp .env.example .env
+      env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       working-directory: ./src
     
     - name: Set up public key file
