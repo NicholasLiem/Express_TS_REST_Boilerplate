@@ -13,11 +13,11 @@ jobs:
 
     services:
       rest_redis:
-        image: redis
+        image: redis:7.2.1
         ports:
           - 6379:6379
       rest_db:
-        image: postgres
+        image: postgres:16-alpine
         env:
           POSTGRES_USER: dev_user
           POSTGRES_PASSWORD: dev_password
@@ -36,7 +36,7 @@ jobs:
     - name: Set up .env file
       run: |
         cp .env.example .env
-        echo "DATABASE_URL=postgresql://dev_user:dev_password@rest_db:5432/dev_database?schema=public" >> .env
+        echo "DATABASE_URL=postgresql://dev_user:dev_password@rest_db:5432/dev_database" >> .env
       working-directory: ./src
     
     - name: Set up public key file
