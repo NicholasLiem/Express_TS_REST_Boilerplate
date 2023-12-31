@@ -38,3 +38,4 @@ docker-compose up -d --build
 3. Inject test db, test redis (custom url) for tests
 4. Add husky
 5. Implement Notification Service / Event Emitter
+6. Logging
