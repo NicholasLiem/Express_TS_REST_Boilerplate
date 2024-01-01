@@ -1,6 +1,12 @@
 # Express TS REST Boilerplate
 [![Node.js CI](https://github.com/NicholasLiem/Express_TS_REST_Boilerplate/actions/workflows/nodejs.yml/badge.svg?branch=main)](https://github.com/NicholasLiem/Express_TS_REST_Boilerplate/actions/workflows/nodejs.yml)
-## How to Install and Run The Program
+
+## ⚡ What is this repository?
+This is a template repository to help you make restful backend app using Express and Typescript
+
+## 🔥 Features
+
+## 🖥️ Running locally for development
 
 1. Clone this repository
 ```sh
@@ -32,7 +38,9 @@ cp .env.example .env && cp public.key.example public.key && cp private.key.examp
 docker-compose up -d --build
 ```
 
-## Checklist to be Added
+
+## ⚠️ Dependencies 
+## 📖 Checklist to be Added
 1. Use generics on Req for JWT claims
 2. Segregating api tests with unit tests
 3. Inject test db, test redis (custom url) for tests
