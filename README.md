@@ -38,12 +38,10 @@ cp .env.example .env && cp public.key.example public.key && cp private.key.examp
 docker-compose up -d --build
 ```
 
-
 ## ⚠️ Dependencies 
 ## 📖 Checklist to be Added
 1. Use generics on Req for JWT claims
 2. Segregating api tests with unit tests
 3. Inject test db, test redis (custom url) for tests
-4. Add husky
 5. Implement Notification Service / Event Emitter
 6. Logging
