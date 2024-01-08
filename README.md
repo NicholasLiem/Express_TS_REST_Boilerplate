@@ -40,7 +40,7 @@ docker-compose up -d --build
 
 ## ⚠️ Dependencies 
 ## 📖 Checklist to be Added
-1. Use generics on Req for JWT claims
+1. Use generics on Request for JWT claims
 2. Segregating api tests with unit tests
 3. Inject test db, test redis (custom url) for tests
 5. Implement Notification Service / Event Emitter
