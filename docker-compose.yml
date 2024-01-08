@@ -23,10 +23,11 @@ services:
       context: .
       dockerfile: dockerfile/Dockerfile.nodejs.dev
     volumes:
-      - ./src:/app
+      - ./src:/app/src
+      - node_modules:/app/src/node_modules
     ports:
       - "3000:3000"
-    command: /scripts/start.sh
+    command: scripts/start.sh
     depends_on:
       - rest_db
     networks:
@@ -45,6 +46,7 @@ services:
 
 volumes:
   rest-pg-data:
+  node_modules:
 
 networks:
   rest-network:

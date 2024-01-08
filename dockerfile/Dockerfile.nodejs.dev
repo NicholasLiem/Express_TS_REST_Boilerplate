@@ -1,18 +1,26 @@
 FROM node:20-alpine
 WORKDIR /app
 
-COPY ./src/package.json ./src/yarn.lock ./
+# Copy only the package.json to /app/src (to cache dependencies)
+COPY ./src/package.json /app/src/
+
+# Change working directory to /app/src
+WORKDIR /app/src
 
 # Installing modules
-RUN yarn install
+RUN yarn install --production=false
 
-# Copy the rest of your application's code
-COPY . .
+# Copy the rest of your application's code into /app/src
+COPY ./src /app/src
 
-# Set permissions for start script
-COPY ./scripts /scripts
-RUN chmod +x /scripts/start.sh
+# Change the working directory back to /app
+WORKDIR /app
+
+# Copy scripts and set permissions
+COPY ./scripts /app/scripts
+RUN chmod +x /app/scripts/start.sh
 
 EXPOSE 3000
 
-# CMD ["/scripts/start.sh"]
+# # CMD to run the start script
+# CMD ["/app/scripts/start.sh"]
