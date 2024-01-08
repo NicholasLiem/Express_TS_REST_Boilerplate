@@ -23,7 +23,7 @@ cd Express_TS_REST_Boilerplate
 cp docker.env.example docker.env
 ```
 
-4. Move to `src`` folder
+4. Move to `src` folder
 ```sh
 cd src
 ```
