@@ -13,7 +13,7 @@ This is a template repository to help you make restful backend app using Express
 https://github.com/NicholasLiem/Express_TS_REST_Boilerplate
 ```
 
-2. Change the current directory to 'Express_TS_REST_Boilerplate' folder
+2. Change the current directory to `Express_TS_REST_Boilerplate` folder
 ```sh
 cd Express_TS_REST_Boilerplate
 ```
@@ -23,17 +23,17 @@ cd Express_TS_REST_Boilerplate
 cp docker.env.example docker.env
 ```
 
-4. Move to 'src' folder
+4. Move to `src`` folder
 ```sh
 cd src
 ```
 
-5. Make a new env file for .env, and the keys
+5. Make a new env file for `.env`, and the keys
 ```sh
 cp .env.example .env && cp public.key.example public.key && cp private.key.example private.key 
 ```
 
-6. Build and run your docker containers
+6. Build and run your Docker containers
 ```sh
 docker-compose up -d --build
 ```
