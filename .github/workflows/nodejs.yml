@@ -34,6 +34,8 @@ jobs:
           - 5432:5432
     env:
       DATABASE_URL: postgresql://dev_user:dev_password@localhost:5432/dev_database
+      POSTGRES_HOST: rest_db
+      REDIS_HOST: rest_redis
 
     steps:
     - uses: actions/checkout@v2
@@ -75,8 +77,8 @@ jobs:
       run: sudo wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz && rm dockerize-linux-amd64-v0.6.1.tar.gz
 
     - name: Wait for Redis to start
-      run: dockerize -wait tcp://localhost:6379 -timeout 1m
-
+      run: dockerize -wait tcp://rest_redis:6379 -timeout 1m
+    
     - name: Run tests
       run: yarn test
       working-directory: ./src

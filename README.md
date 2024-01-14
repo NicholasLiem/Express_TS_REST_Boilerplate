@@ -47,3 +47,4 @@ docker-compose up -d --build
 4. Logging
 5. Explore generics on Express Request
 6. Explore global types and interfaces
+7. Add seeders
