@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -70,6 +70,9 @@ jobs:
     - name: Push db
       run: npx prisma db push
       working-directory: ./src
+
+    - name: Wait for Redis to start
+      run: dockerize -wait tcp://localhost:6379 -timeout 1m
 
     - name: Run tests
       run: yarn test
