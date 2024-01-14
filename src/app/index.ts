@@ -16,16 +16,20 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
-async function main () {
-    try {
-        const serviceContainer = await initContainer()
-        routes(app, serviceContainer)
-    } catch (error) {
-        console.error('Error during initialization:', error)
-        process.exit(1)
-    }
+async function main (): Promise<void> {
+    await initContainer()
+        .then((serviceContainer) => {
+            routes(app, serviceContainer)
+        })
+        .catch((error) => {
+            console.error('Error during initialization:', error)
+            process.exit(1)
+        })
 }
 
-main()
+main().catch((error) => {
+    console.error('Unhandled error during main execution:', error)
+    process.exit(1)
+})
 
 export default app

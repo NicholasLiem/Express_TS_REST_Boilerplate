@@ -9,7 +9,7 @@ export async function initContainer (): Promise<ServiceContainer> {
      * Initialize Prisma Client
      */
     const prismaClient = new PrismaClient()
-    prismaClient.$connect()
+    await prismaClient.$connect()
 
     /**
      * Initialize Redis Client

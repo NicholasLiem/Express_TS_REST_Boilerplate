@@ -8,14 +8,14 @@ export class RedisClient {
     }
 
     public static getInstance (): RedisClient {
-        if (!RedisClient.instance) {
+        if (RedisClient.instance == null) {
             RedisClient.instance = new RedisClient()
         }
         return RedisClient.instance
     }
 
     public async connect (): Promise<void> {
-        if (!this.client) {
+        if (this.client == null) {
             this.client = createClient({
                 url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
                 password: process.env.REDIS_PASSWORD
@@ -31,15 +31,15 @@ export class RedisClient {
     }
 
     public disconnect (): void {
-        if (this.client) {
-            this.client.disconnect()
+        if (this.client !== null) {
+            void this.client.disconnect()
             this.client = null
         }
     }
 
     public async set (key: string, value: string, expireInSeconds?: number): Promise<void> {
-        if (this.client) {
-            if (expireInSeconds) {
+        if (this.client !== null) {
+            if (expireInSeconds !== null) {
                 await this.client.set(key, value, {
                     EX: expireInSeconds,
                     NX: true
@@ -51,11 +51,11 @@ export class RedisClient {
     }
 
     public async get (key: string): Promise<string | null> {
-        return this.client ? await this.client.get(key) : null
+        return (this.client != null) ? await this.client.get(key) : null
     }
 
     public async del (key: string): Promise<void> {
-        if (this.client) {
+        if (this.client != null) {
             await this.client.del(key)
         }
     }

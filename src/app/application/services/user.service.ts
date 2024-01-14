@@ -1,7 +1,7 @@
-import { type User } from '@prisma/client'
 import { type UserRepository } from '../../interfaces/repositories/user.repository'
 import { compareHashedString, hashString } from '../../utils/hash_string.utils'
-import { signJWT } from '../../utils/jwt.utils'
+import { type JwtClaims, signJWT } from '../../utils/jwt.utils'
+import { type UserCreateInput } from '../../dto/users/user.dto'
 
 /**
  * What to do in Services:
@@ -21,19 +21,18 @@ export class UserService implements UserService {
     async authenticate (identifier: string, password: string): Promise<string | null> {
         const user = await this.userRepository.findUserByIdentifier(identifier)
 
-        if (!user) {
+        if (user == null) {
             return null
         }
         const success = await compareHashedString(password, user.hashedPassword)
         if (!success) {
             return null
         }
-        const jwtClaims = {
+
+        const jwtClaims: JwtClaims = {
             userId: user.id,
             username: user.username,
             name: user.name,
-            expiresIn: 60 * 60 * 3,
-            issuedAt: Math.floor(Date.now() / 1000),
             isAdmin: user.isAdmin
         }
 
@@ -42,16 +41,14 @@ export class UserService implements UserService {
 
     async register (username: string, name: string, email: string, password: string): Promise<boolean | null> {
         const hashedPassword = await hashString(password)
-        if (hashedPassword) {
-            // @ts-ignore
-            const newUser: User = {
+        if (hashedPassword.length > 0) {
+            const newUser: UserCreateInput = {
                 username,
                 name,
                 email,
                 isAdmin: false,
                 hashedPassword
             }
-            // @ts-ignore
             await this.userRepository.create(newUser)
             return true
         } else {

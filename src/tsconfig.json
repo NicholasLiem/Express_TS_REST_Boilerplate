@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "es2017",
     "module": "CommonJS",
     "resolveJsonModule": true,
     "moduleResolution": "node",
@@ -12,11 +12,9 @@
     "rootDir": "./app",
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": [
-    "app/**/*.ts",
-    "jest.config.js"
-  ],
+  "include": ["app/**/*.ts", "types/global.d.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,16 +1,28 @@
-import jwt from 'jsonwebtoken'
+import jwt, { type JwtPayload } from 'jsonwebtoken'
 import fs from 'fs'
 
-interface JwtClaims {
+export interface JwtClaims {
     userId: number
     username: string
     name: string
-    expiresIn: number
-    issuedAt: number
     isAdmin: boolean
 }
 
-export function signJWT (payload: JwtClaims, expiresIn: string | number) {
+interface VerifiedJwtResult {
+    payload: JwtPayload | string | null
+    expired: boolean
+}
+
+declare module 'express-serve-static-core' {
+    interface Request {
+        userId?: number
+        username?: string
+        name?: string
+        isAdmin?: boolean
+    }
+}
+
+export function signJWT (payload: JwtClaims, expiresIn: string | number): string {
     const privateKey = fs.readFileSync('private.key')
     const algorithmType = 'RS256'
     return jwt.sign(
@@ -22,7 +34,7 @@ export function signJWT (payload: JwtClaims, expiresIn: string | number) {
         })
 }
 
-export function verifyJWT (token: string) {
+export function verifyJWT (token: string): VerifiedJwtResult {
     try {
         const publicKey = fs.readFileSync('public.key')
         const algorithmType = 'RS256'

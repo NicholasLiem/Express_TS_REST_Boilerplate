@@ -10,7 +10,7 @@ export class ServiceContainer {
     }
 
     public static getInstance (repositoryContainer: RepositoryContainer): ServiceContainer {
-        if (!ServiceContainer.instance) {
+        if (ServiceContainer.instance == null) {
             ServiceContainer.instance = new ServiceContainer(repositoryContainer)
         }
         return ServiceContainer.instance

@@ -9,7 +9,7 @@ export class RepositoryContainer {
     }
 
     public static getInstance (userRepository: UserRepository): RepositoryContainer {
-        if (!RepositoryContainer.instance) {
+        if (RepositoryContainer.instance == null) {
             RepositoryContainer.instance = new RepositoryContainer(userRepository)
         }
         return RepositoryContainer.instance
