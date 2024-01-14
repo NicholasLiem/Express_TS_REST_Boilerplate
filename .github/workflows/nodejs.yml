@@ -34,8 +34,6 @@ jobs:
           - 5432:5432
     env:
       DATABASE_URL: postgresql://dev_user:dev_password@localhost:5432/dev_database
-      POSTGRES_HOST: rest_db
-      REDIS_HOST: rest_redis
 
     steps:
     - uses: actions/checkout@v2
@@ -46,7 +44,7 @@ jobs:
         node-version: '20'
     
     - name: Set up .env file
-      run: cp .env.example .env
+      run: cp .env.local.example .env
       working-directory: ./src
     
     - name: Set up public key file
